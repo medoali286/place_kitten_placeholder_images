@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:textColor="@color/textColor"
+            android:id="@+id/kittenDetails_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Database id goes here"
+            android:textSize="18sp"
+           />
+
+        <TextView
+            android:textColor="@color/textColor"
+            android:id="@+id/kittenDetails_width"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="width goes here"
+            android:textSize="18sp"
+           />
+
+        <TextView
+            android:textColor="@color/textColor"
+            android:id="@+id/kittenDetails_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="height goes here"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:textColor="@color/textColor"
+            android:id="@+id/kittenDetails_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="date goes here"
+            android:textSize="18sp"
+           />
+
+        <ImageView
+            android:layout_margin="20dp"
+            android:textColor="@color/textColor"
+            android:id="@+id/weatherDetails_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+          />
+
+    </LinearLayout>
+
+</ScrollView>
