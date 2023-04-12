@@ -2,20 +2,16 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+
     <item
         android:id="@+id/Item_1"
-        android:icon="@drawable/image_database"
-        android:title="Kitten images"
-        app:showAsAction="always" />
 
-    <item
-        android:id="@+id/Item_2"
-
-        android:title="about"
+        android:title="@string/about"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/Item_3"
+        android:id="@+id/Item_2"
         android:icon="@drawable/add_image"
         android:iconTint="@color/white"
         android:title="Add Kitten Image"

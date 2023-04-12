@@ -13,11 +13,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".UI.KittenImages"
+            android:name=".UI.FavouriteKittenImages"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".UI.GetKittenImage"
+            android:name=".UI.SearchKittenImage"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity

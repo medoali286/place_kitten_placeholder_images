@@ -1,8 +1,8 @@
 package com.example.placekittenplaceholderimages.UI;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,12 +21,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.example.placekittenplaceholderimages.Data.Kitten;
 import com.example.placekittenplaceholderimages.Data.KittenDatabase;
-import com.example.placekittenplaceholderimages.Data.KittenItem;
-import com.example.placekittenplaceholderimages.Data.KittenItemDAO;
+import com.example.placekittenplaceholderimages.Data.KittenDAO;
 import com.example.placekittenplaceholderimages.Data.KittenViewModel;
 import com.example.placekittenplaceholderimages.R;
-import com.example.placekittenplaceholderimages.databinding.ActivityKittenImagesBinding;
+
+import com.example.placekittenplaceholderimages.databinding.ActivityFavouriteKittenImagesBinding;
 import com.example.placekittenplaceholderimages.databinding.KittenRowBinding;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -34,12 +35,12 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class KittenImages extends AppCompatActivity {
-ActivityKittenImagesBinding binding;
+public class FavouriteKittenImages extends AppCompatActivity {
+ActivityFavouriteKittenImagesBinding binding;
 
     private RecyclerView.Adapter myAdapter;
-    private ArrayList<KittenItem> kittenItems;
-    private KittenItemDAO mDAO;
+    private ArrayList<Kitten> kittenItems;
+    private KittenDAO mDAO;
     private Executor thread;
 
     private KittenViewModel kittenModel;
@@ -71,16 +72,18 @@ boolean IsPressed;
 
 
         switch( item.getItemId() ) {
+
+
+
             case R.id.Item_1:
 
-                Intent intent= new Intent(this, GetKittenImage.class);
 
 
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
-                startActivity(intent);
-                this.finish();
-
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(FavouriteKittenImages.this);
+                builder.setMessage(R.string.kitten_about_message ).
+                        setTitle(R.string.kitten_about_title).
+                        setNegativeButton(R.string.ok, (dialog, cl) -> {
+                        }).create().show();
 
 
                 break;
@@ -89,30 +92,16 @@ boolean IsPressed;
             case R.id.Item_2:
 
 
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(KittenImages.this);
-                builder.setMessage("" ).
-                        setTitle("How to use the WeatherStack?").
-                        setNegativeButton("ok", (dialog, cl) -> {
-                        }).create().show();
-
-
-                break;
-
-
-            case R.id.Item_3:
-
-
                 if (kittenItems.size() != 0 && IsPressed) {
 
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(KittenImages.this);
-                    builder1.setMessage("Do you want to Delete this Image with : " + tv_date.getText().toString()).
-                            setTitle("Question").
-                            setNegativeButton("no", (dialog, cl) -> {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(FavouriteKittenImages.this);
+                    builder1.setMessage(getString(R.string.do_you_want_to_delete_this_image_with_date) + tv_date.getText().toString()).
+                            setTitle(R.string.question).
+                            setNegativeButton(R.string.no, (dialog, cl) -> {
                             })
-                            .setPositiveButton("yes", (dialog, cl) -> {
+                            .setPositiveButton(R.string.yes, (dialog, cl) -> {
 
-                                KittenItem removedMessage = kittenItems.get(position);
+                                Kitten removedMessage = kittenItems.get(position);
                                 thread.execute(() ->
                                 {
 
@@ -125,8 +114,8 @@ boolean IsPressed;
                                 });
 
 
-                                Snackbar.make(binding.getRoot(), "You deleted article  " + tv_date.getText(), Snackbar.LENGTH_SHORT)
-                                        .setAction("Undo", c -> {
+                                Snackbar.make(binding.getRoot(), String.valueOf(R.string.you_deleted_image_with_date) + tv_date.getText(), Snackbar.LENGTH_SHORT)
+                                        .setAction(R.string.undo, c -> {
                                             kittenItems.add(position, removedMessage);
                                             myAdapter.notifyItemInserted(position);
                                         }).show();
@@ -167,9 +156,9 @@ boolean IsPressed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("KittenImages");
+        setTitle(getString(R.string.favourite_kitten_images));
 
-      binding=ActivityKittenImagesBinding.inflate(getLayoutInflater());
+      binding=ActivityFavouriteKittenImagesBinding.inflate(getLayoutInflater());
       setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
@@ -180,7 +169,7 @@ boolean IsPressed;
         if (kittenItems == null) {
 
 
-            kittenModel.kittenItems.setValue(kittenItems = new ArrayList<KittenItem>());
+            kittenModel.kittenItems.setValue(kittenItems = new ArrayList<Kitten>());
 
 
             thread = Executors.newSingleThreadExecutor();
@@ -215,10 +204,10 @@ boolean IsPressed;
 
         kittenModel.selectedKittenItem.observe(this, (newKittenItemValue) -> {
 
-            Log.i("tag", "onCreate: " + "newWeatherItemValue.getName()");
 
 
-            KittenDetailsFragment kittenFragment = new KittenDetailsFragment(newKittenItemValue);
+
+            KittenFragment kittenFragment = new KittenFragment(newKittenItemValue);
 
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLocation, kittenFragment).addToBackStack("").commit();
@@ -245,12 +234,13 @@ boolean IsPressed;
             }
 
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
 
 
-                holder.width.setText("width : "+kittenItems.get(position).getWidth());
-                holder.height.setText("height : "+kittenItems.get(position).getHeight());
+                holder.width.setText( getString(R.string.width)+" : "+kittenItems.get(position).getWidth());
+                holder.height.setText(getString(R.string.height)+" : "+kittenItems.get(position).getHeight());
 
                 holder.date.setText(kittenItems.get(position).getDate());
 
@@ -319,7 +309,7 @@ boolean IsPressed;
             itemView.setOnClickListener(clk -> {
 
               position= getAbsoluteAdapterPosition();
-              KittenItem selected = kittenItems.get(position);
+              Kitten selected = kittenItems.get(position);
 
                 kittenModel.selectedKittenItem.postValue(selected);
                 tv_date=date;

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Place Kitten Placeholder images</string>
+    <string name="kitten_about_message">taper la largeur et la hauteur pour obtenir une image de chaton avec ces dimensions, enregistrer l\'image et les dimensions du chaton et DateTime, vue recycleur pour afficher les éléments</string>
+    <string name="kitten_about_title">Comment utiliser le chaton Place ?</string>
+    <string name="ok">d\'accord</string>
+    <string name="do_you_want_to_delete_this_image_with_date">Voulez-vous supprimer cette image avec la date :</string>
+    <string name="you_deleted_image_with_date">Vous avez supprimé l\'image avec la date</string>
+    <string name="undo">annuler</string>
+    <string name="favourite_kitten_images">Images de chaton préférées</string>
+    <string name="question">Question</string>
+    <string name="no">Non</string>
+    <string name="yes">Oui</string>
+    <string name="width">largeur</string>
+    <string name="height">hauteur</string>
+    <string name="get_image">Obtenir une image</string>
+    <string name="get_favourite_kittens">Obtenez des chatons préférés</string>
+    <string name="about">à propos</string>
+    <string name="search_kitten_image">Rechercher une image de chaton</string>
+    <string name="date">date</string>
+    <string name="image_saved">image enregistrée</string>
+</resources>
