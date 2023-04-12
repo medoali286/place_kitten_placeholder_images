@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 
 @Entity
-public class KittenItem {
+public class Kitten {
 
 
 
@@ -28,7 +28,7 @@ public class KittenItem {
     @ColumnInfo(name="imagePath")
     protected String imagePath;
 
-    public KittenItem(String width, String height, String date, String imagePath) {
+    public Kitten(String width, String height, String date, String imagePath) {
         this.width = width;
         this.height = height;
         this.date = date;

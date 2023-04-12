@@ -4,10 +4,10 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
 
-@Database(entities = {KittenItem.class}, version = 1)
+@Database(entities = {Kitten.class}, version = 1)
 public abstract class KittenDatabase extends RoomDatabase {
 
-    public abstract KittenItemDAO cmDAO();
+    public abstract KittenDAO cmDAO();
 
 
 }

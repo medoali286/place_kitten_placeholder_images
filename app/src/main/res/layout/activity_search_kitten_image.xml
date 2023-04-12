@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".UI.SearchKittenImage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.GetKittenImage"
+    android:background="@color/white">
+
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
     android:orientation="vertical">
 
 
@@ -23,14 +33,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <EditText
+                android:inputType="number"
                 android:layout_margin="5dp"
                 android:textColorHint="@color/textColor"
                 android:layout_weight="1"
                 android:id="@+id/width"
-                android:hint="width"
+                android:hint="@string/width"
                 android:textAlignment="center"
                 android:maxLines="1"
                 android:layout_width="match_parent"
@@ -41,12 +52,13 @@
 
 
             <EditText
+                android:inputType="number"
                 android:layout_margin="5dp"
                 android:textColorHint="@color/textColor"
                 android:textAlignment="center"
                 android:layout_weight="1"
                 android:id="@+id/height"
-                android:hint="height"
+                android:hint="@string/height"
                 android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -70,10 +82,22 @@
     <Button
         android:layout_margin="10dp"
         android:id="@+id/btn_get_image"
-        android:text="Get Image"
+        android:text="@string/get_image"
         android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+
+
+    <Button
+        android:layout_margin="10dp"
+        android:id="@+id/btn_favourite_kittens"
+        android:text="@string/get_favourite_kittens"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
 
     <Space
         android:layout_width="match_parent"
@@ -94,3 +118,4 @@
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>
+</ScrollView>

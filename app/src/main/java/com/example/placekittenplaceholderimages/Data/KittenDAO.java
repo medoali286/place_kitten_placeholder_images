@@ -10,19 +10,19 @@ import java.util.List;
 
 
 @Dao
-public interface KittenItemDAO  {
+public interface KittenDAO {
 
 
 
     @Insert
-    void insertKittenItem(KittenItem k);
+    void insertKittenItem(Kitten k);
 
 
-    @Query("Select * from KittenItem")
-    List<KittenItem> getAllKittenItem();
+    @Query("Select * from Kitten")
+    List<Kitten> getAllKittenItem();
 
     @Delete
-    void deleteKittenItem(KittenItem k);
+    void deleteKittenItem(Kitten k);
 
 
 

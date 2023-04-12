@@ -1,5 +1,6 @@
 package com.example.placekittenplaceholderimages.UI;
 
+import android.annotation.SuppressLint;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,16 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.placekittenplaceholderimages.Data.KittenItem;
+import com.example.placekittenplaceholderimages.Data.Kitten;
+import com.example.placekittenplaceholderimages.R;
 import com.example.placekittenplaceholderimages.databinding.KittenDetailsBinding;
 
-public class KittenDetailsFragment extends Fragment {
+public class KittenFragment extends Fragment {
 
 
 
-   KittenItem selected;
+   Kitten selected;
 
-    public KittenDetailsFragment(KittenItem k) {
+    public KittenFragment(Kitten k) {
 
         selected = k;
 
@@ -37,6 +39,7 @@ public class KittenDetailsFragment extends Fragment {
         return true;
     }
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,9 +51,9 @@ public class KittenDetailsFragment extends Fragment {
 
         binding.getRoot().setBackgroundColor(Color.WHITE);
         binding.kittenDetailsId.setText("Id = " + selected.id);
-        binding.kittenDetailsWidth.setText("width : " + selected.getWidth());
-        binding.kittenDetailsHeight.setText("height : " + selected.getHeight());
-        binding.kittenDetailsDate.setText("Date : " + selected.getDate());
+        binding.kittenDetailsWidth.setText(getString(R.string.width)+" : " + selected.getWidth());
+        binding.kittenDetailsHeight.setText(getString(R.string.height)+" : " + selected.getHeight());
+        binding.kittenDetailsDate.setText(getString(R.string.date)+" : " + selected.getDate());
         binding.weatherDetailsIcon.setImageBitmap(BitmapFactory.decodeFile(selected.getImagePath()));
 
 

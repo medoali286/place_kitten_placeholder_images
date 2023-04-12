@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Place Kitten Placeholder images</string>
+    <string name="kitten_about_message">typing width and height to get a kitten image with these dimensions,save kitten image and  dimensions and DateTime,recycler view  to show items</string>
+    <string name="kitten_about_title">How to use the Place kitten?</string>
+    <string name="ok">ok</string>
+    <string name="do_you_want_to_delete_this_image_with_date">"Do you want to Delete this Image with  date: "</string>
+    <string name="you_deleted_image_with_date">"You deleted image with date "</string>
+    <string name="undo">Undo</string>
+    <string name="favourite_kitten_images">Favourite Kitten Images</string>
+    <string name="question">Question</string>
+    <string name="no">no</string>
+    <string name="yes">yes</string>
+    <string name="width">width</string>
+    <string name="height">height</string>
+    <string name="get_image">Get Image</string>
+    <string name="get_favourite_kittens">Get Favourite Kittens</string>
+    <string name="about">about</string>
+    <string name="search_kitten_image">Search Kitten Image</string>
+    <string name="date">date</string>
+    <string name="image_saved">image saved</string>
 </resources>

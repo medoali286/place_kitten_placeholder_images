@@ -22,11 +22,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.placekittenplaceholderimages.Data.Kitten;
 import com.example.placekittenplaceholderimages.Data.KittenDatabase;
-import com.example.placekittenplaceholderimages.Data.KittenItem;
-import com.example.placekittenplaceholderimages.Data.KittenItemDAO;
+import com.example.placekittenplaceholderimages.Data.KittenDAO;
 import com.example.placekittenplaceholderimages.R;
-import com.example.placekittenplaceholderimages.databinding.ActivityGetKittenImageBinding;
+
+
+import com.example.placekittenplaceholderimages.databinding.ActivitySearchKittenImageBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
@@ -39,13 +41,13 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 
-public class GetKittenImage extends AppCompatActivity {
-    ActivityGetKittenImageBinding binding;
+public class SearchKittenImage extends AppCompatActivity {
+    ActivitySearchKittenImageBinding binding;
 
     SharedPreferences prefs;
     private Executor thread;
 
-    private KittenItemDAO mDAO;
+    private KittenDAO mDAO;
     String imagePath;
     Bitmap image;
 
@@ -69,13 +71,21 @@ public class GetKittenImage extends AppCompatActivity {
 
 
         switch (item.getItemId()) {
+
+
+
+
+
+
+
             case R.id.Item_1:
 
-                Intent intent = new Intent(this, KittenImages.class);
 
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
-                startActivity(intent);
-                this.finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SearchKittenImage.this);
+                builder.setMessage(R.string.kitten_about_message).
+                        setTitle(R.string.kitten_about_title).
+                        setNegativeButton(R.string.ok, (dialog, cl) -> {
+                        }).create().show();
 
 
                 break;
@@ -84,27 +94,14 @@ public class GetKittenImage extends AppCompatActivity {
             case R.id.Item_2:
 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(GetKittenImage.this);
-                builder.setMessage("").
-                        setTitle("How to use the WeatherStack?").
-                        setNegativeButton("ok", (dialog, cl) -> {
-                        }).create().show();
-
-
-                break;
-
-
-            case R.id.Item_3:
-
-
                 thread.execute(()->{
 
                 if (image!=null){
                     SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
                     String currentDatEndTime = sdf.format(new Date());
 
-                    mDAO.insertKittenItem(new KittenItem(binding.width.getText().toString(),binding.height.getText().toString(),currentDatEndTime,imagePath));
-                    Snackbar.make(binding.getRoot(), "image saved " , Snackbar.LENGTH_SHORT).show();
+                    mDAO.insertKittenItem(new Kitten(binding.width.getText().toString(),binding.height.getText().toString(),currentDatEndTime,imagePath));
+                    Snackbar.make(binding.getRoot(),getString( R.string.image_saved) , Snackbar.LENGTH_SHORT).show();
                 }
                 });
 
@@ -121,9 +118,9 @@ public class GetKittenImage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Get Kitten Image");
+        setTitle(getString(R.string.search_kitten_image));
 
-        binding = ActivityGetKittenImageBinding.inflate(getLayoutInflater());
+        binding = ActivitySearchKittenImageBinding.inflate(getLayoutInflater());
 
         setSupportActionBar(binding.toolbar);
 
@@ -156,10 +153,21 @@ public class GetKittenImage extends AppCompatActivity {
         });
 
 
+
+        binding.btnFavouriteKittens.setOnClickListener(c->{
+
+            Intent intent= new Intent(this, FavouriteKittenImages.class);
+
+            startActivity(intent);
+
+        });
+
+
+
         binding.btnGetImage.setOnClickListener(c -> {
 
 
-            Toast.makeText(this, "please wait image", Toast.LENGTH_SHORT).show();
+
 
             String   width = binding.width.getText().toString();
             String  height = binding.height.getText().toString();
@@ -175,9 +183,19 @@ public class GetKittenImage extends AppCompatActivity {
                 image = BitmapFactory.decodeFile(imagePath);
             } else {
                 ImageRequest imgReq = new ImageRequest(imgUrl, new Response.Listener<Bitmap>() {
+
+
+
                     @Override
                     public void onResponse(Bitmap bitmap) {
+
+
+                        Toast.makeText(SearchKittenImage.this, "please wait image", Toast.LENGTH_SHORT).show();
+
                         image = bitmap;
+
+                        binding.kittenImage.setImageBitmap(image);
+
                         FileOutputStream fOut = null;
                         try {
                             fOut = openFileOutput(imageName, Context.MODE_PRIVATE);
@@ -200,14 +218,13 @@ public class GetKittenImage extends AppCompatActivity {
 
             }
 
+runOnUiThread(()->{
 
-            runOnUiThread(() -> {
-
-
-                binding.kittenImage.setImageBitmap(image);
+    binding.kittenImage.setImageBitmap(image);
 
 
-            });
+});
+
 
 
         });
